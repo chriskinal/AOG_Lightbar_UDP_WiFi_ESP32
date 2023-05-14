@@ -69,7 +69,6 @@ unsigned int localPort = PORT_TO_LISTEN;      // local port to listen for UDP pa
 byte packetBuffer[UDP_PACKET_SIZE]; //buffer to hold incoming packets
 unsigned long lastvalideXtrackreceived = 0;
 
-
 CRGBArray <NUMPIXELS> leds;
 const uint8_t centerpixel = (NUMPIXELS-1)/2;
 uint8_t Neopixel_Brightness = LED_BRIGHTNESS;// default brightness value between 0 and 255
@@ -108,6 +107,9 @@ void setup() {
 
   //set hostname
   wm.setHostname(YOUR_WIFI_HOSTNAME);
+
+    // set dark theme
+  wm.setClass("invert");
   
   bool res;
   // res = wm.autoConnect(); // auto generated AP name from chipid
@@ -119,7 +121,7 @@ void setup() {
   } 
   else {
       //if you get here you have connected to the WiFi    
-      SerialDebug.print("WiFi IP of lightbar: "); SerialDebug.println(WiFi.localIP());        
+      SerialDebug.print("WiFi IP of lightbar: "); SerialDebug.println(WiFi.localIP());
   }
   
   FastLED.addLeds<LED_TYPE ,Neopixel_Pin,LED_COLOR_SETTING>(leds, NUMPIXELS ).setCorrection(LED_CORRECTION);
@@ -133,7 +135,7 @@ void setup() {
 void loop() {
   // put your main code here, to run repeatedly:
   LANStatus = WiFi.status();
-  SerialDebug.print("LANStatus: ");SerialDebug.print(LANStatus);
+  // SerialDebug.print("LANStatus: ");SerialDebug.print(LANStatus);
 
   #ifdef DEBUG_UART_ENABLED
     // SerialDebug.print ("Status: ");
